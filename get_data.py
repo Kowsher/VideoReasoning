@@ -47,3 +47,7 @@ def download_video(example):
     return {"video_path": saved_path}
 
 dataset1 = dataset.map(download_video, num_proc=num_proc-4)
+
+dataset1 = dataset1.filter(lambda example: example["video_path"] is not None)
+dataset1 = dataset1.shuffle(seed=42)
+
